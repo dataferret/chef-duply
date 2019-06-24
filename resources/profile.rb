@@ -43,6 +43,7 @@ attribute :compression,
 
 attribute :volume_size, kind_of: Integer, default: 25
 attribute :temp_dir, kind_of: String, default: '/tmp'
+attribute :arch_dir, kind_of: String, default: nil
 
 attribute :template, kind_of: String, default: 'conf.erb'
 attribute :cookbook, kind_of: String, default: 'duply'

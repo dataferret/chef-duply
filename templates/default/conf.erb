@@ -90,8 +90,9 @@ TEMP_DIR=<%= @temp_dir %>
 #       big over time so you might want to put it not in the home dir.
 # default '~/.cache/duplicity/duply_<profile>/'
 # if set  '${ARCH_DIR}/<profile>'
-#ARCH_DIR=/some/space/safe/.duply-cache
-
+<% if @arch_dir %>
+ARCH_DIR=<%= @arch_dir %>
+<% end %>
 
 # more duplicity command line options can be added in the following way
 # don't forget to leave a separating space char at the end

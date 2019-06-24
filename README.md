@@ -72,6 +72,7 @@ duply_profile 'swift' do
   ]
 end
 ```
+
 Execute duply commands from the cookbook
 
 ```ruby
