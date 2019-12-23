@@ -20,10 +20,9 @@
 use_inline_resources
 
 action :delete do
-  d = directory "#{node['duply']['dir']}/#{new_resource.name}" do
+  directory "#{node['duply']['dir']}/#{new_resource.name}" do
     action :delete
   end
-  new_resource.updated_by_last_action(d.updated_by_last_action?)
 end
 
 action :create do
@@ -34,7 +33,7 @@ action :create do
     action :create
   end
 
-  tconf = template "#{node['duply']['dir']}/#{new_resource.name}/conf" do
+  template "#{node['duply']['dir']}/#{new_resource.name}/conf" do
     cookbook new_resource.cookbook
     source new_resource.template
     owner 'root'
@@ -65,14 +64,14 @@ action :create do
   end
 
   # python-swifclient is not available in Ubuntu 12.04 and Debian 7.11
-  tpackage_swift = package 'python-swiftclient' do
+  package 'python-swiftclient' do
     action :install
     only_if { new_resource.swift_username.nil? }
     not_if { node['platform'].eql?('ubuntu') && node['platform_version'].eql?('12.04') }
     not_if { node['platform'].eql?('debian') && node['platform_version'].eql?('7.11') }
   end
 
-  texclude = template "#{node['duply']['dir']}/#{new_resource.name}/exclude" do
+  template "#{node['duply']['dir']}/#{new_resource.name}/exclude" do
     cookbook 'duply'
     source 'exclude.erb'
     owner 'root'
@@ -85,7 +84,7 @@ action :create do
     action :create
   end
 
-  tpre = template "#{node['duply']['dir']}/#{new_resource.name}/pre" do
+  template "#{node['duply']['dir']}/#{new_resource.name}/pre" do
     cookbook new_resource.pre_cookbook
     source new_resource.pre_template
     owner 'root'
@@ -95,7 +94,7 @@ action :create do
     sensitive true
   end
 
-  tpost = template "#{node['duply']['dir']}/#{new_resource.name}/post" do
+  template "#{node['duply']['dir']}/#{new_resource.name}/post" do
     cookbook new_resource.post_cookbook
     source new_resource.post_template
     owner 'root'
@@ -105,9 +104,9 @@ action :create do
     sensitive true
   end
 
-  new_resource.updated_by_last_action(tconf.updated_by_last_action? ||
-                                      tpackage_swift.updated_by_last_action? ||
-                                      texclude.updated_by_last_action? ||
-                                      tpre.updated_by_last_action? ||
-                                      tpost.updated_by_last_action?)
+  # new_resource.updated_by_last_action(tconf.updated_by_last_action? ||
+  #                                     tpackage_swift.updated_by_last_action? ||
+  #                                     texclude.updated_by_last_action? ||
+  #                                     tpre.updated_by_last_action? ||
+  #                                     tpost.updated_by_last_action?)
 end

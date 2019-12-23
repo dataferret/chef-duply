@@ -23,27 +23,35 @@ action :nothing do
 end
 
 action :backup do
-  r = duply_command_as_user(new_resource.user,
-                            new_resource.profile, 'backup')
-  new_resource.updated_by_last_action(r.updated_by_last_action?)
+  converge_by 'duply backup' do
+    duply_command_as_user(new_resource.user,
+                          new_resource.profile, 'backup')
+  end
 end
 
 action :full do
-  r = duply_command_as_user(new_resource.user,
-                            new_resource.profile, 'full')
-  new_resource.updated_by_last_action(r.updated_by_last_action?)
+  converge_by 'duply full' do
+    duply_command_as_user(new_resource.user,
+                          new_resource.profile,
+                          'full')
+  end
 end
 
 action :incremental do
-  r = duply_command_as_user(new_resource.user,
-                            new_resource.profile, 'incr')
-  new_resource.updated_by_last_action(r.updated_by_last_action?)
+  converge_by 'duply incr' do
+    duply_command_as_user(new_resource.user,
+                          new_resource.profile,
+                          'incr')
+  end
 end
 
 action :restore do
-  r = duply_command_as_user(new_resource.user,
-                            new_resource.profile, 'restore', [new_resource.destination])
-  new_resource.updated_by_last_action(r.updated_by_last_action?)
+  converge_by 'duply restore' do
+    duply_command_as_user(new_resource.user,
+                          new_resource.profile,
+                          'restore',
+                          [new_resource.destination])
+  end
 end
 
 private

@@ -1,31 +1,19 @@
-AlignParameters:
+AllCops:
+  Exclude:
+    - 'Guardfile'
+    - "db/**/*"
+    - "tmp/**/*"
+    - "vendor/**/*"
+    - "bin/**/*"
+    - "log/**/*"
+
+Style/Encoding:
   Enabled: false
 
-Encoding:
+Style/FrozenStringLiteralComment:
   Enabled: false
 
-ClassLength:
-  Enabled: false
-
-MethodLength:
-  Enabled: false
-
-LineLength:
-  Enabled: false
-
-# HashSyntax:
-#  EnforcedStyle: hash_rockets
-
-Documentation:
-  Enabled: false
-
-PerceivedComplexity:
-  Enabled: false
-
-CyclomaticComplexity:
-  Enabled: false
-
-Style/FileName:
+Style/Documentation:
   Enabled: false
 
 Metrics/BlockLength:
@@ -36,14 +24,14 @@ Metrics/BlockLength:
     - 'spec/**/*.rb'
     - 'test/**/*.rb'
 
-EndOfLine:
+Metrics/MethodLength:
   Enabled: false
 
-AllCops:
-  Exclude:
-    - 'Guardfile'
-    - "db/**/*"
-    - "tmp/**/*"
-    - "vendor/**/*"
-    - "bin/**/*"
-    - "log/**/*"
+Naming/FileName:
+  Enabled: false
+
+Layout/EndOfLine:
+  Enabled: false
+
+Layout/LineLength:
+  Enabled: false
