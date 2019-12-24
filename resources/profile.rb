@@ -18,6 +18,7 @@
 #
 
 actions :create, :delete
+default_action :create
 
 attribute :name, kind_of: String, name_attribute: true
 
@@ -38,7 +39,7 @@ attribute :passphrase, kind_of: String
 attribute :passphrase_sign, kind_of: String
 attribute :compression,
           kind_of: Symbol,
-          equal_to: [:bzip2, :incremental, :none],
+          equal_to: %i[bzip2 incremental none],
           default: :none
 
 attribute :volume_size, kind_of: Integer, default: 25
@@ -62,5 +63,4 @@ attribute :swift_authversion, kind_of: Integer, default: 2
 
 def initialize(*args)
   super
-  @action = :create
 end
